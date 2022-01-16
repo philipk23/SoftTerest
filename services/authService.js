@@ -1,12 +1,12 @@
-// const apiKey = 'AIzaSyDkjSVQ-BjuUsCSgbq1tyQC8DGjlSWixIQ';
+const apiKey = "AIzaSyDLCQsMaAgWBOshgGkKPPwrJMp6uiboimk";
 
-// const api = {
-//     register: `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`,
-//     login: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
-// }
+const api = {
+    register: `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`,
+    login: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
+}
 
 import { request } from "./request.js";
-
+ 
 export const register = async (email, password) => {
     let response = await request(api.register, 'POST', {
         email,
