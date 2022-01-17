@@ -65,6 +65,7 @@ export default class Register extends HTMLElement{
 
         register(email, password)
             .then(data => {
+                notify('User registration successful!')
                 Router.go('/')
             })
 

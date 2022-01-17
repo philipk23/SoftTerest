@@ -50,6 +50,7 @@ export default class Login extends HTMLElement{
 
         login(email, password)
             .then(res => {
+                notify('Login successful!');
                 Router.go('/');
             })
 

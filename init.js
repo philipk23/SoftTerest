@@ -4,6 +4,7 @@ import Home from './components/home.js';
 import Register from './components/register.js';
 import Navigation from './components/navigation.js';
 import Login from './components/login.js';
+import Create from './components/create.js';
 import { logout } from './services/authService.js';
 
 
@@ -11,6 +12,7 @@ customElements.define('home-component', Home);
 customElements.define('navigation-component', Navigation);
 customElements.define('register-component', Register);
 customElements.define('login-component', Login);
+customElements.define('create-component', Create);
 
 const root = document.getElementById('root');
 const router = new Router(root);
@@ -33,13 +35,17 @@ router.setRoutes([
         action: (context, commands) => {
             logout()
                 .then(() => {
-                    // notify(`Successful logout`, 'success');
+                    notify(`Logout successful!`);
 
                     // location.pathname = '/';
                 })
-                .catch(err => notify(`Couldn't be logged out - ${err.message}`));
+                .catch(err => notify('Invalid credentials', 'error'));
 
             return commands.redirect('/login');
         }
+    },
+    {
+        path: '/create',
+        component: 'create-component'
     }
 ])
