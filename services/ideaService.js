@@ -34,7 +34,7 @@ export const deleteIdea = async (id) => {
     return res;
 }
 
-export const likeMovie = async(id, email) => {
+export const likeIdea = async(id, email) => {
     let res = await request(`${databaseUrl}/ideas/${id}/likes/.json`, 'POST', {email});
 
     return res;

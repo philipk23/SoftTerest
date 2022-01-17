@@ -5,6 +5,8 @@ import Register from './components/register.js';
 import Navigation from './components/navigation.js';
 import Login from './components/login.js';
 import Create from './components/create.js';
+import IdeaCard from './components/idea-card.js';
+import Dashboard from './components/dashboard.js';
 import { logout } from './services/authService.js';
 
 
@@ -13,6 +15,8 @@ customElements.define('navigation-component', Navigation);
 customElements.define('register-component', Register);
 customElements.define('login-component', Login);
 customElements.define('create-component', Create);
+customElements.define('idea-card', IdeaCard);
+customElements.define('dashboard-component', Dashboard);
 
 const root = document.getElementById('root');
 const router = new Router(root);
@@ -47,5 +51,9 @@ router.setRoutes([
     {
         path: '/create',
         component: 'create-component'
+    },
+    {
+        path: '/dashboard',
+        component: 'dashboard-component'
     }
 ])
