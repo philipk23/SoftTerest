@@ -1,6 +1,7 @@
 import { html, render } from 'https://unpkg.com/lit-html?module';
+import { Router } from 'https://unpkg.com/@vaadin/router';
 import { getUserData } from '../services/authService.js';
-import { getOneById } from '../services/ideaService.js';
+import { deleteIdea, getOneById } from '../services/ideaService.js';
 
 const getIdea = async (ideaId, email) => {
     let ideaData = await getOneById(ideaId);
@@ -43,7 +44,7 @@ const template = (ctx) => html`
     ${ctx.idea.creator == ctx.user
         ? html`
             <div class="text-center">
-            <a class="btn detb" href="">Delete</a>
+            <a class="btn detb" href="" @click="${ctx.onDelete}">Delete</a>
             </div>
         `
         : html`
@@ -77,14 +78,18 @@ export default class Details extends HTMLElement{
     onDelete(e){
         e.preventDefault();
 
-        let ideaId = location.params.ideaId
+        let ideaId = location.pathname.replace('/details/', '').replace('/edit', '');
+
+        deleteIdea(ideaId)
+            .then(res => {
+                Router.go('/dashboard');
+            })
     }
 
     render(){
         getIdea(this.location.params.id)
             .then(idea => {
                 this.idea = idea;
-                console.log(this.idea);
                 render(template(this), this, { eventContext: this });
             })
     }
