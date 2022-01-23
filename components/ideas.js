@@ -10,7 +10,7 @@ const template = (ctx) => html`
     </div>
 `;
 
-export default class IdeaCard extends HTMLElement{
+export default class Idea extends HTMLElement{
     connectedCallback(){
         this.render();
     }

@@ -5,8 +5,10 @@ import Register from './components/register.js';
 import Navigation from './components/navigation.js';
 import Login from './components/login.js';
 import Create from './components/create.js';
-import IdeaCard from './components/idea-card.js';
+import Idea from './components/ideas.js';
 import Dashboard from './components/dashboard.js';
+import Details from './components/details.js';
+import Comment from './components/comment.js';
 import { logout } from './services/authService.js';
 
 
@@ -15,8 +17,10 @@ customElements.define('navigation-component', Navigation);
 customElements.define('register-component', Register);
 customElements.define('login-component', Login);
 customElements.define('create-component', Create);
-customElements.define('idea-card', IdeaCard);
+customElements.define('idea-component', Idea);
 customElements.define('dashboard-component', Dashboard);
+customElements.define('details-component', Details);
+customElements.define('comment-component', Comment);
 
 const root = document.getElementById('root');
 const router = new Router(root);
@@ -55,5 +59,9 @@ router.setRoutes([
     {
         path: '/dashboard',
         component: 'dashboard-component'
-    }
+    },
+    {
+        path: '/details/:id',
+        component: 'details-component',
+    },
 ])

@@ -6,7 +6,7 @@ const template = (ctx) => html`
  <div id="dashboard-holder">
     ${ctx.ideas
         ? html`
-            ${ctx.ideas.map(idea => html`<idea-card .data=${idea}></idea-card>`)}
+            ${ctx.ideas.map(idea => html`<idea-component .data=${idea}></idea-component>`)}
         `
         : html`
             <h1>No ideas yet! Be the first one :)</h1>
@@ -22,7 +22,7 @@ export default class Dashboard extends HTMLElement{
                 this.ideas = ideas;
                 this.render();
             }) 
-        this.render()
+        //this.render()
     }
 
     render(){
