@@ -3,7 +3,7 @@ import { Router } from 'https://unpkg.com/@vaadin/router';
 import { getUserData } from '../services/authService.js';
 import { deleteIdea, getOneById } from '../services/ideaService.js';
 
-const getIdea = async (ideaId, email) => {
+const getIdea = async (ideaId) => {
     let ideaData = await getOneById(ideaId);
 
     const likes = Object.values(ideaData.likes || {});
@@ -68,29 +68,29 @@ export default class Details extends HTMLElement{
 
     connectedCallback(){
         getOneById(this.location.params.id)
-            .then(idea => {
-                Object.assign(this, idea);
-                this.render();
-            })
-        //this.render()
+        .then(idea => {
+            Object.assign(this, idea);
+            this.render();
+        })
+        this.render()
     }
-
+        
     onDelete(e){
         e.preventDefault();
-
+        
         let ideaId = location.pathname.replace('/details/', '').replace('/edit', '');
-
+        
         deleteIdea(ideaId)
-            .then(res => {
-                Router.go('/dashboard');
-            })
+        .then(res => {
+            Router.go('/dashboard');
+        })
     }
-
+    
     render(){
         getIdea(this.location.params.id)
-            .then(idea => {
-                this.idea = idea;
-                render(template(this), this, { eventContext: this });
-            })
+        .then(idea => {
+            this.idea = idea;
+            render(template(this), this, { eventContext: this });
+        })
     }
 }
