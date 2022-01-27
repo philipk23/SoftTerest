@@ -39,3 +39,9 @@ export const likeIdea = async(id, email) => {
 
     return res;
 }
+
+export const addComment = async (comment, email, id) => {
+    let res = await request(`${databaseUrl}/ideas/${id}/comments/.json`, 'POST', {email, comment});
+
+    return res;
+}

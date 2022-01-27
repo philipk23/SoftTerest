@@ -1,7 +1,7 @@
 import { html, render } from 'https://unpkg.com/lit-html?module';
 import { Router } from 'https://unpkg.com/@vaadin/router';
 import { getUserData } from '../services/authService.js';
-import { deleteIdea, getOneById } from '../services/ideaService.js';
+import { addComment, deleteIdea, getOneById } from '../services/ideaService.js';
 
 const getIdea = async (ideaId) => {
     let ideaData = await getOneById(ideaId);
@@ -31,7 +31,7 @@ const template = (ctx) => html`
       </p>
       <p class="infoType">Comments:</p>
       <ul>
-        ${ctx.idea.comments > 0
+        ${ctx.idea.comments.length > 0
             ? html`
                 ${ctx.idea.comments.map(comment => html`<comment-component .data=${comment}></comment-component>`)}                
             `
@@ -49,8 +49,8 @@ const template = (ctx) => html`
         `
         : html`
             <form class="text-center" method="" action="">
-                <textarea class="textarea-det" name="newComment" id=""></textarea>
-                <button type="submit" class="btn detb com-btn" >Comment</button>
+                <textarea class="textarea-det" name="newComment" id="textArea"></textarea>
+                <button type="submit" class="btn detb com-btn" @click="${ctx.onComment}">Comment</button>
                 <a class="btn detb like-btn" href="">Like</a>
             </form>
         `
@@ -81,9 +81,22 @@ export default class Details extends HTMLElement{
         let ideaId = location.pathname.replace('/details/', '').replace('/edit', '');
         
         deleteIdea(ideaId)
-        .then(res => {
-            Router.go('/dashboard');
-        })
+            .then(res => {
+                Router.go('/dashboard');
+            })
+    }
+
+    onComment(e){
+        e.preventDefault();
+
+        let text = document.getElementById('textArea').value;
+        let ideaId = location.pathname.replace('/details/', '').replace('/edit', '');
+        let userEmail = getUserData().email;
+
+        addComment(text, userEmail, ideaId)
+            .then(res => {
+                Router.go(`/details/:${ideaId}`)
+            })
     }
     
     render(){
