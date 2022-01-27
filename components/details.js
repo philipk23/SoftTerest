@@ -44,14 +44,14 @@ const template = (ctx) => html`
     ${ctx.idea.creator == ctx.user
         ? html`
             <div class="text-center">
-            <a class="btn detb" href="" @click="${ctx.onDelete}">Delete</a>
+            <a class="btn detb del-btn" href="" @click="${ctx.onDelete}">Delete</a>
             </div>
         `
         : html`
             <form class="text-center" method="" action="">
                 <textarea class="textarea-det" name="newComment" id=""></textarea>
-                <button type="submit" class="btn detb" >Comment</button>
-                <a class="btn detb" href="">Like</a>
+                <button type="submit" class="btn detb com-btn" >Comment</button>
+                <a class="btn detb like-btn" href="">Like</a>
             </form>
         `
     } 
@@ -72,7 +72,7 @@ export default class Details extends HTMLElement{
             Object.assign(this, idea);
             this.render();
         })
-        this.render()
+        //this.render()
     }
         
     onDelete(e){
