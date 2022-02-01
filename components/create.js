@@ -70,7 +70,7 @@ export default class Create extends HTMLElement{
         createIdea(newIdea)
             .then(res => {
                 notify('Idea created successfully!')
-                Router.go('/')
+                Router.go('/dashboard')
             })
             .catch(error => {
                 notify('Something went sideways', 'error');
