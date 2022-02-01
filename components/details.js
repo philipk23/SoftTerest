@@ -82,6 +82,7 @@ export default class Details extends HTMLElement{
         
         deleteIdea(ideaId)
             .then(res => {
+                notify('Idea deleted successfully', 'success')
                 Router.go('/dashboard');
             })
     }

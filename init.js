@@ -49,7 +49,7 @@ router.setRoutes([
                 })
                 .catch(err => notify('Invalid credentials', 'error'));
 
-            return commands.redirect('/login');
+            return commands.redirect('/');
         }
     },
     {
