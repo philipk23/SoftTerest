@@ -1,7 +1,7 @@
 import { html, render } from 'https://unpkg.com/lit-html?module';
 import { Router } from 'https://unpkg.com/@vaadin/router';
 import { getUserData } from '../services/authService.js';
-import { addComment, deleteIdea, getOneById } from '../services/ideaService.js';
+import { addComment, deleteIdea, getOneById, likeIdea } from '../services/ideaService.js';
 
 const getIdea = async (ideaId) => {
     let ideaData = await getOneById(ideaId);
@@ -51,7 +51,7 @@ const template = (ctx) => html`
             <form class="text-center" method="" action="">
                 <textarea class="textarea-det" name="newComment" id="textArea"></textarea>
                 <button type="submit" class="btn detb com-btn" @click="${ctx.onComment}">Comment</button>
-                <a class="btn detb like-btn" href="">Like</a>
+                <a class="btn detb like-btn" href="" @click="${ctx.onLike}">Like</a>
             </form>
         `
     } 
@@ -70,9 +70,9 @@ export default class Details extends HTMLElement{
         getOneById(this.location.params.id)
         .then(idea => {
             Object.assign(this, idea);
-            this.render();
+            //this.render();
         })
-        //this.render()
+        this.render()
     }
         
     onDelete(e){
@@ -90,13 +90,24 @@ export default class Details extends HTMLElement{
         e.preventDefault();
 
         let text = document.getElementById('textArea').value;
-        let ideaId = location.pathname.replace('/details/', '').replace('/edit', '');
+        let ideaId = location.pathname.replace('/details/', '');
         let userEmail = getUserData().email;
 
         addComment(text, userEmail, ideaId)
             .then(res => {
-                Router.go(`/details/:${ideaId}`)
+                Router.go(`/dashboard`);
             })
+    }
+
+    onLike(e){
+        e.preventDefault();
+
+        let ideaId = location.pathname.replace('/details/', '');
+
+        likeIdea(ideaId, getUserData().email)
+            .then(res => {
+                Router.go(`/dashboard`);
+            })        
     }
     
     render(){

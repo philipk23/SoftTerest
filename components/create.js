@@ -63,7 +63,7 @@ export default class Create extends HTMLElement{
             description,
             imageURL,
             creator: getUserData().email,
-            likes: 0,
+            //likes: 0,
             comments: []
         }
 

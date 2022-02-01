@@ -11,9 +11,15 @@ export const getAllIdeas = async (searchText) => {
 
     //console.log(Object.keys(res).map(key => ({key, ...res[key]})));
 
-    //It works without the filter part
+    //It works without the filter part\
 
-    return Object.keys(res).map(key => ({key, ...res[key]}))//.filter(x => !searchText || searchText == key.title);
+    let data;
+    
+    if (res) {
+        data = Object.keys(res).map(key => ({key, ...res[key]})).filter(x => !searchText || searchText == key.title);        
+    }
+
+    return data || {};
 }
 
 export const getOneById = async (id) => {

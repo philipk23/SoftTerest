@@ -4,7 +4,7 @@ import { getAllIdeas } from '../services/ideaService.js';
 const template = (ctx) => html`
  <navigation-component></navigation-component>
  <div id="dashboard-holder">
-    ${ctx.ideas
+    ${ctx.ideas.length
         ? html`
             ${ctx.ideas.map(idea => html`<idea-component .data=${idea}></idea-component>`)}
         `
