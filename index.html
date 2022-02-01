@@ -245,6 +245,7 @@
   </footer>
   <script>
     function notify(message, type = 'success'){
+        console.log('notify');
         let notificationElement;
 
         switch (type) {
@@ -260,10 +261,11 @@
         }
 
         notificationElement.innerHTML = message;
-        notificationElement.parentElement.style.display = 'block';
+        notificationElement.style.display = 'block';
+        console.log(notificationElement);
 
         setTimeout(() => {
-            notificationElement.parentElement.style.display = 'none';
+            notificationElement.style.display = 'none';
         }, 5000);
     }
 </script>
